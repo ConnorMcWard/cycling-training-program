@@ -8,6 +8,7 @@ load_dotenv()
 
 class Config:
     """This class contains the configurations for different api keys for the app."""
+
     SECRET_KEY = os.getenv("FLASK_SECRET_KEY")
 
     # Wahoo
@@ -29,4 +30,3 @@ class Config:
 
     FLASK_ENV = os.getenv("FLASK_ENV", "development")
     FLASK_DEBUG = os.getenv("FLASK_DEBUG")
-

@@ -4,8 +4,6 @@ from auth.wahoo_auth import wahoo_auth
 from clients.wahoo_client import get_workouts
 
 
-
-
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
@@ -19,12 +17,8 @@ def create_app():
 
     return app
 
+
 app = create_app()
 
 if __name__ == "__main__":
-    app.run(
-        host="localhost",
-        port=5000,
-        debug=True,
-        ssl_context="adhoc"
-    )
+    app.run(host="localhost", port=5000, debug=True, ssl_context="adhoc")

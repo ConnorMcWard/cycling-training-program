@@ -1,4 +1,4 @@
-""" This file authenticates the app user to the Wahoo API"""
+"""This file authenticates the app user to the Wahoo API"""
 
 import requests
 from flask import Blueprint, redirect, request, session, current_app
@@ -11,7 +11,6 @@ AUTH_URL = "https://api.wahooligan.com/oauth/authorize"
 TOKEN_URL = "https://api.wahooligan.com/oauth/token"
 
 
-
 @wahoo_auth.route("login")
 def wahoo_login():
     config = current_app.config
@@ -22,9 +21,9 @@ def wahoo_login():
         "client_id": config["WAHOO_CLIENT_ID"],
         "redirect_uri": config["WAHOO_REDIRECT_URI"],
         "response_type": "code",
-        "scope": config["WAHOO_SCOPES"]
+        "scope": config["WAHOO_SCOPES"],
     }
-    
+
     auth_redirect = f"{AUTH_URL}?{urlencode(params)}"
 
     print("Full redirect URL:", auth_redirect)
@@ -44,8 +43,8 @@ def wahoo_callback():
             "client_secret": config["WAHOO_CLIENT_SECRET_KEY"],
             "code": code,
             "grant_type": "authorization_code",
-            "redirect_uri": config["WAHOO_REDIRECT_URI"]
-        }
+            "redirect_uri": config["WAHOO_REDIRECT_URI"],
+        },
     )
 
     token_json = token_response.json()
@@ -56,8 +55,7 @@ def wahoo_callback():
     session["wahoo_refresh_token"] = token_json["refresh_token"]
     session["wahoo_expires_at"] = token_json["expires_in"]
 
-
     return {
         "message": "Wahoo authentication successful",
-        "token_recieved": session["wahoo_access_token"] is not None
+        "token_recieved": session["wahoo_access_token"] is not None,
     }
