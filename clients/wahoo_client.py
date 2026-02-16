@@ -30,8 +30,5 @@ def get_completed_workouts():
 
     return response.json()
 
-@app.route("/test-wahoo")
-def test_wahoo():
-    workouts = get_workouts()
-    return workouts
+
 
