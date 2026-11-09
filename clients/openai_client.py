@@ -1,3 +1,23 @@
+from openai import OpenAI
+import os
+
+from dotenv import load_dotenv
+
+load_dotenv()
+
+
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+
+
+client = OpenAI()
+
+reponse = client.responses.create(
+    model="gpt-5.2",
+    input="What model are you?"
+)
+
+print(reponse.output_text)
+
 # You are an elite cycling coach
 # Respond ONLY with valid JSON matching this schema:
 
@@ -14,7 +34,7 @@
 # }
 
 # Justin's Coach Builder
-"""ChatGPT, I'd like you to become my new cycling coach and help me create a customised training plan. Below, I've added some details to guide you in designing a plan that fits my goals, timeline, and lifestyle:
+COACH_BUILDER_PROMPT = """ChatGPT, I'd like you to become my new cycling coach and help me create a customised training plan. Below, I've added some details to guide you in designing a plan that fits my goals, timeline, and lifestyle:
 
         •	I'm an amateur cyclist, not a performance athlete, but I'm looking to improve.
 
@@ -53,3 +73,5 @@ Limitations:
         2	The equipment I have available includes a road bike (only outdoor riding)
 
         3	I haven't had any significant injuries"""
+
+
